@@ -1,6 +1,6 @@
-This was forked to add ExchangeRate-API.com support.
-
 # Calculate Anything
+
+> **Note:** This is a fork with ExchangeRate-API.com support. Version 4.1.0.
 
 Calculate Anything is a workflow for Alfred 4, that uses **natural language** and is able to calculate multiple things like currency, time, vat, px, em, rem, percentage, and more.
 
@@ -46,7 +46,7 @@ Mac OS Big Sur users and below do not need to do anything as your Mac OS already
 
 ## Download
 
-Make sure to download the latest released directly from the releases page. [Download here](https://github.com/biati-digital/alfred-calculate-anything/releases/).
+Make sure to download the latest released directly from the releases page. [Download here](https://github.com/ldebritto/alfred-calculate-anything/releases/).
 
 ## Base Configuration
 
@@ -98,7 +98,7 @@ Press Option + Return to copy the value of a single unit, for example 23.76
 
 ### Currency Options
 
-By default the workflow will use exchangeratehost api to make the conversion. exchangeratehost only support 32 currencies; if you need support for additional currencies supported by Calculate Anything, you need to get a _free_ API key from [https://fixer.io](https://fixer.io) -- it takes less than a minute!
+This workflow uses [ExchangeRate-API.com](https://www.exchangerate-api.com/) for currency conversion, which supports 161 currencies. You need to get a _free_ API key from [https://app.exchangerate-api.com/sign-up](https://app.exchangerate-api.com/sign-up) -- it takes less than a minute!
 
 The following options are available for each currency. Simply launch Alfred, type `ca` and select any of the options below. [View the configuration section for more info](#configuration).
 
@@ -108,11 +108,8 @@ This will become your base currency, if you type `100eur` it will automatically 
 If you no longer want a base currency you can select this option to list all configured base currencies, you can delete a currency by simply pressing Return
 - **Set currency format**
 Used to format the converted amount, you will see a list of formats to choose from, simply press return to select a format.
-~~- **Set Fixer API**
-Set your fixer API Key for support more currencies, after you select this option just copy paste your Key and press Return to save it.~~
-~~
-- **Set ExchangeRate-API.com API key**
-Set your ExchangeRate-API.com Key for support more currencies, after you select this option just copy paste your Key and press Return to save it.~~
+- **Set ExchangeRate-API Key**
+Set your ExchangeRate-API.com API Key for currency conversion support. After you select this option, just copy paste your Key and press Return to save it.
 
 ### Currency Symbols
 
@@ -660,7 +657,7 @@ You can modify stop words in the same keys file, for example `/lang/en_EN-keys.p
 
 ## Configuration
 
-You can easily configure the Calculate Anything workflow. Simply open Alfred, type `ca` and you will see a list of all the available options to configure the workflow. You can also filter the options for example launch Alfred and start typing `ca fixer` and you will automatically see the options filtered. To select an option just press Return.
+You can easily configure the Calculate Anything workflow. Simply open Alfred, type `ca` and you will see a list of all the available options to configure the workflow. You can also filter the options for example launch Alfred and start typing `ca exchangerate` and you will automatically see the options filtered. To select an option just press Return.
 
 <p align="center">
 <img src="/assets/gifts/config-v3-01.gif?raw=true">
@@ -689,6 +686,16 @@ This workflow would not be possible without:
 - [Convertor](https://github.com/olifolkerd/convertor) with some modifications
 
 ## Changelog
+
+### 4.1.0
+
+- New: Replaced Fixer.io with ExchangeRate-API.com for currency conversion
+- New: Support for 161 currencies via ExchangeRate-API.com
+- New: Currency flags displayed in conversion results
+- Improved: Updated auto-updater to use fork repository
+- Improved: PHP 8.x compatibility (fixed dynamic property deprecation warnings)
+- Fixed: Removed circular dependency issues with functions.php
+- Changed: Updated all configuration references from `fixer_apikey` to `exchangerateapi_key`
 
 ### 3.2.1
 
