@@ -108,8 +108,11 @@ This will become your base currency, if you type `100eur` it will automatically 
 If you no longer want a base currency you can select this option to list all configured base currencies, you can delete a currency by simply pressing Return
 - **Set currency format**
 Used to format the converted amount, you will see a list of formats to choose from, simply press return to select a format.
-- **Set Fixer API**
-Set your fixer API Key for support more currencies, after you select this option just copy paste your Key and press Return to save it.
+~~- **Set Fixer API**
+Set your fixer API Key for support more currencies, after you select this option just copy paste your Key and press Return to save it.~~
+~~
+- **Set ExchangeRate-API.com API key**
+Set your ExchangeRate-API.com Key for support more currencies, after you select this option just copy paste your Key and press Return to save it.~~
 
 ### Currency Symbols
 

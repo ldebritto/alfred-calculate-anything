@@ -226,8 +226,8 @@ class CalculateAnything
     public function setUpdater($options = [])
     {
         $update_data = [
-            'plist_url' => 'https://raw.githubusercontent.com/biati-digital/alfred-calculate-anything/master/info.plist',
-            'workflow_url' => 'https://github.com/biati-digital/alfred-calculate-anything/releases/latest/download/Calculate.Anything.alfredworkflow',
+            'plist_url' => 'https://raw.githubusercontent.com/ldebritto/alfred-calculate-anything/master/info.plist',
+            'workflow_url' => 'https://github.com/ldebritto/alfred-calculate-anything/releases/latest/download/Calculate.Anything.alfredworkflow',
             'alfred_notifications' => 'notifier',
             'check_interval' => 86400 * 15, // check every 15 days
         ];
