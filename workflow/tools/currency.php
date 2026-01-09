@@ -20,7 +20,8 @@ class Currency extends CalculateAnything implements CalculatorInterface
     private $keywords;
     private $currencyList;
     private $lang;
-    private static $fixer_rates;
+    private $rates_cache_seconds;
+    private static $exchangerateapi_rates;
     private static $basic_rates;
 
     /**
@@ -353,21 +354,14 @@ class Currency extends CalculateAnything implements CalculatorInterface
         $from = $data['from'];
         $to = $data['to'];
         $use_cache = (isset($data['use_cache']) ? $data['use_cache'] : true);
-        $fixer_apikey = $this->getSetting('fixer_apikey');
-        $method = !empty($fixer_apikey) ? 'fixer' : 'exchangeratehost';
 
         if (is_string($to)) {
             $to = [$to];
         }
 
         foreach ($to as $currency) {
-            // Use Fixer io
-            if ($method == 'fixer') {
-                $cache_seconds = ($use_cache ? $this->rates_cache_seconds : 0);
-                $conversion = $this->fixerConversion($amount, $from, $currency);
-            } elseif ($method == 'exchangeratehost') {
-                $conversion = $this->exchangeRateHostConversion($amount, $from, $currency);
-            }
+            $cache_seconds = ($use_cache ? $this->rates_cache_seconds : 0);
+            $conversion = $this->exchangeRateApiConversion($amount, $from, $currency, $cache_seconds);
 
             if (isset($conversion['error']) && !empty($conversion['error'])) {
                 $converted['error'] = $conversion['error'];
@@ -383,7 +377,7 @@ class Currency extends CalculateAnything implements CalculatorInterface
 
 
     /**
-     * Fixer.io conversion
+     * ExchangeRate-API conversion
      *
      * @param int $amount
      * @param string $from
@@ -391,43 +385,53 @@ class Currency extends CalculateAnything implements CalculatorInterface
      * @param int $cache_seconds
      * @return array
      */
-    private function fixerConversion($amount, $from, $to)
+    private function exchangeRateApiConversion($amount, $from, $to, $cache_seconds = 0)
     {
-        $apikey = $this->getSetting('fixer_apikey');
+        $apikey = $this->getSetting('exchangerateapi_key');
         if (empty($apikey)) {
             return [
                 'total' => '',
                 'single' => '',
-                'error' => $this->lang['nofixerapikey_title'],
+                'error' => 'You need to configure the API key for ExchangeRate-API',
             ];
         }
 
-        $exchange = self::$fixer_rates;
-        $exchange = false;
-        if (!$exchange) {
-            $cache_seconds = $this->rates_cache_seconds;
-            $ratesURL = "http://data.fixer.io/api/latest?access_key={$apikey}&format=1";
-            $exchange = $this->getRates('fixer', $ratesURL, $cache_seconds);
+        $exchange = self::$exchangerateapi_rates;
+        if (!$exchange || !isset($exchange[$from])) {
+            $ratesURL = "https://v6.exchangerate-api.com/v6/{$apikey}/latest/{$from}";
+            $exchange_data = $this->getRates('exchangerateapi_' . $from, $ratesURL, $cache_seconds);
 
-            if (isset($exchange['error'])) {
+            if (isset($exchange_data['error'])) {
                 return [
                     'total' => '',
                     'single' => '',
-                    'error' => $exchange['error']['info'],
-                    'reload' => isset($exchange['reload']) ? $exchange['reload'] : false,
+                    'error' => $exchange_data['error'],
+                    'reload' => isset($exchange_data['reload']) ? $exchange_data['reload'] : false,
                 ];
             }
 
-            self::$fixer_rates = $exchange;
+            if (!isset($exchange_data['conversion_rates'])) {
+                return [
+                    'total' => '',
+                    'single' => '',
+                    'error' => 'Invalid API response',
+                ];
+            }
+
+            self::$exchangerateapi_rates[$from] = $exchange_data['conversion_rates'];
+            $exchange = self::$exchangerateapi_rates;
         }
 
-        $base = $exchange['base'];
-        $rates = $exchange['rates'];
-        $default_base_currency = $rates[$base];
+        $rates = $exchange[$from];
+        if (!isset($rates[$to])) {
+            return [
+                'total' => '',
+                'single' => '',
+                'error' => "Currency {$to} not supported",
+            ];
+        }
 
-        $new_base_currency = $rates[$from]; //from currency
-        $base_exchange = $default_base_currency / $new_base_currency;
-        $value = ($rates[$to] * $base_exchange);
+        $value = $rates[$to];
         $total = $amount * $value;
 
         return ['total' => $total, 'single' => $value, 'error' => false];

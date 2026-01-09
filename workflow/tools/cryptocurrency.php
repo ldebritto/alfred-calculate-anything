@@ -18,6 +18,8 @@ class Cryptocurrency extends CalculateAnything implements CalculatorInterface
     private $stop_words;
     private $keywords;
     private $lang;
+    private $symbolsList;
+    private $rates_cache_seconds;
     private static $rates;
 
     /**

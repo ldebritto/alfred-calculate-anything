@@ -1,3 +1,5 @@
+This was forked to add ExchangeRate-API.com support.
+
 # Calculate Anything
 
 Calculate Anything is a workflow for Alfred 4, that uses **natural language** and is able to calculate multiple things like currency, time, vat, px, em, rem, percentage, and more.
@@ -684,6 +686,10 @@ This workflow would not be possible without:
 - [Convertor](https://github.com/olifolkerd/convertor) with some modifications
 
 ## Changelog
+
+### 3.2.1
+
+- New: Replaced fixer.io with ExchangeRate-API.com for usage with free account.
 
 ### 3.2.0
 

@@ -1776,8 +1776,8 @@ Made with love by https://www.biati.digital</string>
 		<string>[\"USD\",\"CNY\",\"EUR\",\"TWD\"]</string>
 		<key>coinmarket_apikey</key>
 		<string>c823b5ee-7ca5-4823-8f98-a200e5fd7041</string>
-		<key>fixer_apikey</key>
-		<string>65fa43c123a096c17dbd903c2b0adbe9</string>
+		<key>exchangerateapi_key</key>
+		<string></string>
 		<key>language</key>
 		<string>es_ES</string>
 		<key>last_update_check</key>
@@ -1800,12 +1800,12 @@ Made with love by https://www.biati.digital</string>
 		<string>time_format</string>
 		<string>coinmarket_apikey</string>
 		<string>last_update_check</string>
-		<string>fixer_apikey</string>
+		<string>exchangerateapi_key</string>
 		<string>settings_migrated</string>
 	</array>
 	<key>version</key>
-	<string>3.2.0</string>
+	<string>3.2.1</string>
 	<key>webaddress</key>
-	<string>https://github.com/biati-digital/alfred-calculate-anything</string>
+	<string>https://github.com/ldebritto/alfred-calculate-anything</string>
 </dict>
 </plist>

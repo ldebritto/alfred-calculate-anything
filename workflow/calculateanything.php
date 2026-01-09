@@ -28,7 +28,7 @@ class CalculateAnything
     protected static $settingsArgs = [
         'base_currency',
         'coinmarket_apikey',
-        'fixer_apikey',
+        'exchangerateapi_key',
         'language',
         'last_update_check',
         'settings_migrated',

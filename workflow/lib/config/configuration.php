@@ -136,20 +136,20 @@ if ($process && $main_menu) {
         ],
     ];
 
-    // Currency Fixer API Key
+    // ExchangeRate-API Key
     $response[] = [
-        'title' => $strings['fixer_title'],
-        'subtitle' => $strings['fixer_subtitle'] . ': ' . getVariable('fixer_apikey', ''),
-        'match' => 'fixer ' . $strings['fixer_title'],
-        'autocomplete' => $strings['fixer_title'],
+        'title' => 'ExchangeRate-API Key',
+        'subtitle' => 'Get your free API key at app.exchangerate-api.com: ' . getVariable('exchangerateapi_key', 'Not set'),
+        'match' => 'exchangerate exchangerateapi currency api key',
+        'autocomplete' => 'ExchangeRate-API Key',
         'valid' => true,
-        'arg' => getVariable('fixer_apikey', ''),
+        'arg' => getVariable('exchangerateapi_key', ''),
         'variables' => [
-            'id' => 'fixer_apikey',
+            'id' => 'exchangerateapi_key',
             'action' => 'menu',
             'input' => true,
-            'input_title' => 'API Key',
-            'input_value' => getVariable('fixer_apikey', ''),
+            'input_title' => 'ExchangeRate-API Key',
+            'input_value' => getVariable('exchangerateapi_key', ''),
         ],
     ];
 

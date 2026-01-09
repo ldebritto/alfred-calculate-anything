@@ -70,14 +70,14 @@ if (empty($param)) {
         'arg' => 'coinmarket_apikey',
     ];
 
-    // Currency Fixer API Key
+    // ExchangeRate-API Key
     $response[] = [
-        'title' => $strings['fixer_title'],
-        'subtitle' => $strings['fixer_subtitle'] . ': ' . getSetting('fixer_apikey', '', $settings),
-        'match' => $strings['fixer_title'],
-        'autocomplete' => $strings['fixer_title'],
+        'title' => 'ExchangeRate-API Key',
+        'subtitle' => 'Get your free API key at app.exchangerate-api.com: ' . getSetting('exchangerateapi_key', 'Not set', $settings),
+        'match' => 'ExchangeRate-API Key',
+        'autocomplete' => 'ExchangeRate-API Key',
         'valid' => true,
-        'arg' => 'fixer_apikey',
+        'arg' => 'exchangerateapi_key',
     ];
 
     // Measurement system
